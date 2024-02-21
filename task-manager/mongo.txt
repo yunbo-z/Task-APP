@@ -1,0 +1,42 @@
+
+# restart docker problems shooting
+sudo systemctl stop mongod
+# check that mongod was stopped or not:
+sudo systemctl status mongod | grep Active
+
+sudo systemctl start docker
+sudo docker restart c63c93780a6b2d8f9270fa4268d514bef93140258534880fb4825a0fbf5283be
+
+# Reference
+1. MongoDB nodejs driver document
+ 
+# fedora 38 install mongodb 7.0
+sudo tee /etc/yum.repos.d/mongodb.repo << "EOF" > /dev/null
+[mongodb]
+name=MongoDB
+baseurl=https://repo.mongodb.org/yum/redhat/9/mongodb-org/7.0/${basearch}/
+gpgkey=https://www.mongodb.org/static/pgp/server-7.0.asc
+EOF
+sudo rpm --import https://www.mongodb.org/static/pgp/server-7.0.asc
+sudo dnf install mongodb-org
+sudo systemctl enable mongod.service
+sudo systemctl restart mongod.service
+
+# MongoDB Node.js driver usage
+# find:
+# insert:
+# update:
+    collection.updateOne(filter, updateDoc, option);
+    collection.updateMany();
+# delete:
+    collection.deleteOne()
+# update operator:
+$currentDate: Sets the value of a field to current date, either as a Date or a Timestamp.
+$inc: Increments the value of the field by the specified amount.
+$min: Only updates the field if the specified value is less than the existing field value.
+$max: Only updates the field if the specified value is greater than the existing field value.
+$mul: Multiplies the value of the field by the specified amount.
+$rename: Renames a field.
+$set: Sets the value of a field in a document.
+$setOnInsert: Sets the value of a field if an update results in an insert of a document. Has no effect on update operations that modify existing documents.
+$unset: Removes the specified field from a document.
