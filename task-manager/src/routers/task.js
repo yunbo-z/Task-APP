@@ -20,12 +20,22 @@ router.post('/tasks', auth, async (req, res) => {
 
 
 router.get('/tasks', auth, async (req, res) => {
+    const match = {}
+
+    if (req.query.completed) {
+        match.completed = req.query.completed === 'true'
+    }
+
     try {
-        const tasks = await Tasks.find({ owner: req.user._id })
-        // await req.user.populate('tasks').execPopulate()
-        res.send(tasks)
+        // const tasks = await Tasks.find({ owner: req.user._id })
+        await req.user.populate({
+            path: 'task',
+            match
+        }) //??? why here after removing exec() everything works
+        res.send(req.user.task)
     } catch (e) {
-        res.status(500).send()
+
+        res.status(500).send(req.user.task)
     }
 })
 
