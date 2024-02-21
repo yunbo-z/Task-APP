@@ -97,13 +97,13 @@ router.delete('/users/me', auth, async (req, res) => {
         // if (!user) {
         //     return res.status(404).send()
         // }
-        req.user = {}
+        await req.user.remove()
         console.log('userremove: ' + req.user)
 
         res.send(req.user)
     } catch (e) {
         console.log('hh')
-        res.status(500).send(e)
+        res.status(500).send()
     }
 })
 
