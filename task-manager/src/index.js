@@ -15,13 +15,14 @@ const port = process.env.PORT || 3000
 //         next()
 //     }
 // })
-const multer = require('multer')
-const upload = multer({
-    dest: 'images'
-})
-app.post('/upload', upload.single('upload'), (req, res) => {
-    res.send()
-})
+
+// const multer = require('multer')
+// const upload = multer({
+//     dest: 'images'
+// })
+// app.post('/upload', upload.single('upload'), (req, res) => {
+//     res.send()
+// })
 
 app.use(express.json()) // converting the JSON data in the request body into JavaScript objects
 app.use(userRouter)
