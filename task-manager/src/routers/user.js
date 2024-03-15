@@ -49,12 +49,12 @@ router.post('/users/logoutALL', auth, async (req,res) => {
     }
 })
 
-const upload = multer({
-    dest: 'avatars'
-})
-router.post('/users/me/avatar', upload.single('avatar'), (req, res) => {
-    res.send()
-})
+// const upload = multer({
+//     dest: 'avatars'
+// })
+// router.post('/users/me/avatar', upload.single('avatar'), (req, res) => {
+//     res.send()
+// })
 
 
 //after running auth middleware then will run the following async function 
